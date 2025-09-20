@@ -1,0 +1,83 @@
+# 🧱 VM Build Notes
+
+This document outlines the build process and configuration details for each virtual machine in the Help Desk + SOC Analyst lab. Each VM serves a specific role in simulating IT support and cybersecurity workflows.
+
+---
+
+## 🧰 VM Overview
+
+| VM Name         | OS               | Role                    | Purpose                            |
+|----------------|------------------|-------------------------|------------------------------------|
+| `pfSense`       | FreeBSD-based    | Firewall                | Network segmentation, traffic control |
+| `Kali Linux`    | Kali Rolling     | Attacker                | Red Team simulations, exploit testing |
+| `Metasploitable`| Ubuntu 14.04     | Vulnerable Target       | SOC alert generation, exploit response |
+| `Ubuntu Desktop`| Ubuntu 22.04     | User Workstation        | Help Desk simulations, phishing target |
+| `WinServer-AD`  | Windows Server 2019 | Domain Controller    | Active Directory, GPOs, file shares |
+
+---
+
+## 🔧 Build Steps (General)
+
+1. Download ISO from official source
+2. Create VM in VirtualBox with appropriate RAM, CPU, and NIC settings
+3. Install OS and apply updates
+4. Configure hostname and static IP (if needed)
+5. Enable SSH or RDP for remote access (optional)
+6. Take snapshot after clean install
+
+---
+
+## 🛡️ pfSense VM
+
+- **NIC 1 (WAN)**: NAT Adapter
+- **NIC 2 (LAN)**: Host-only Adapter
+- Set LAN IP: `192.168.10.1/24`
+- Enable logging for firewall rules
+- Optional: Install pfBlockerNG for DNS filtering
+
+---
+
+## 🧨 Kali Linux VM
+
+- Update via `apt update && apt upgrade`
+- Install tools: `nmap`, `wireshark`, `metasploit-framework`
+- Set static IP: `192.168.10.10`
+- Used for scanning, phishing, and exploit simulations
+
+---
+
+## 🧱 Metasploitable VM
+
+- Default credentials: `msfadmin:msfadmin`
+- Set static IP: `192.168.10.20`
+- Vulnerable services: FTP, SSH, HTTP, etc.
+- Used to trigger alerts and test SOC playbooks
+
+---
+
+## 🧑‍💻 Ubuntu Desktop VM
+
+- Install GUI (if minimal ISO used): `sudo apt install ubuntu-desktop`
+- Set static IP: `192.168.10.30`
+- Simulates end-user workstation
+- Used for help desk tickets and phishing response
+
+---
+
+## 🪟 Windows Server VM
+
+- Install Active Directory Domain Services (AD DS)
+- Create domain: `corp.local`
+- Set static IP: `192.168.10.40`
+- Create user accounts, groups, and shared folders
+- Apply GPOs for login banners, drive mapping, etc.
+
+---
+
+## 📁 Next Steps
+
+Continue to:
+- [Onboarding Simulation](../simulations/onboarding-ticket.md)
+- [Access Investigation](../simulations/access-denied-investigation.md)
+
+---
